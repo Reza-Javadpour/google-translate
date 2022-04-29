@@ -1,0 +1,557 @@
+ <!DOCTYPE html>
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Google Translate</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<script type="text/javascript" src="./js/jquery-3.3.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="./bootstrap/css/bootstrap.min.css">
+	<script type="text/javascript" src="./bootstrap/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.1.1/css/all.css">
+	<link rel="shortcut icon" href="./img/fav-icon.png" />
+	<link rel="apple-touch-icon-precomposed" href="./img/apple-icon.png" />
+	<link rel="apple-touch-icon" href="./img/apple-icon.png" />
+	<link rel="stylesheet" type="text/css" href="./css/main.css">
+
+</head>
+<body>
+
+
+	<!-- START NAVBAR -->
+	<nav id="top" class="navbar navbar-light bg-light">
+	  <a class="navbar-brand" href="#">
+	    <img src="./img/google_logo.png" width="92" height="33" alt="">
+	  </a>
+	  <div>
+	  	<span id="app_menu" class="opct_55 nav_element">
+	  		<a href="#">
+	  			<img src="./img/menu.png">
+	  		</a>
+	  	</span>
+	  	<span id="account_manager" class="nav_element">
+  			<img id="avatar" src="./img/1.jpg">
+	  	</span>
+	  </div>
+	</nav>
+	<!-- END NAVBAR -->
+
+
+	<!-- START CONTENT -->
+	<div class="container-fluid">
+
+		<div class="row">
+			<div class="page_title col">
+				<a href="#">Translate</a>
+			</div>
+		</div>
+	</div>
+	<div id="content" class="container-fluid">
+		<div id="main" class="row">
+			<div id="s_input" class="sector col-md-6">
+				<form action="">
+					<div class="d-flex justify-content-between">
+
+						<div class="lang btn-group" role="group" aria-label="Basic example">
+							<button type="button" class="btn btn-sm btn-light english_mode active">English</button>
+							<button type="button" class="btn btn-sm btn-light persian_mode">Persian</button>
+						</div>
+						<div class="lang">
+							<button id="switch_lang" type="button" class="btn btn-sm btn-light">
+								<img class="opct_55" src="./img/switch.png" alt="">
+							</button>
+						</div>
+					</div>
+					<div class="textarea_body">
+						<div id="delete_input" class="btn btn-sm delete_input delete_btn_en hidden"><i class="fas fa-times"></i></div>
+						<textarea id="input" class="box text_left" type="text" name="text" wrap="SOFT" tabindex="0" dir="ltr" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" style="box-sizing: border-box; overflow-y: hidden; overflow-x: auto; padding-right: 20px;"></textarea>
+						<div id="ta_counter"><span id="input_length">0</span> / 5000</div>
+					</div>
+				</form>
+
+			</div>
+
+			<div id="output" class="sector col-md-6">
+				<form action="">
+
+					<div class="lang btn-group" role="group" aria-label="Basic example">
+						<button type="button" class="btn btn-sm btn-light persian_mode">English</button>
+						<button type="button" class="btn btn-sm btn-light english_mode active">Persian</button>
+					</div>
+
+					<button type="button" id="translate_lang" class="btn btn-sm btn-primary">Translate</button>
+					<div>
+						<div id="output_result" class="box text_right">
+							<!-- OUTPUT PLACE HERE -->
+						</div>
+						<div id="output_status" class="d-flex justify-content-between">
+							<div>
+								<div id="saved" class="btn btn-sm status_btn" data-toggle="tooltip" data-placement="top" data-original-title="Saved">
+									<img src="./img/star.png" alt="">
+								</div>
+								<div id="copy" class="btn btn-sm status_btn">
+									<img src="./img/copy.png" alt="">
+								</div>
+								<div id="share" class="btn btn-sm status_btn">
+									<img src="./img/share.png" alt="">
+								</div>
+							</div>
+							<div>
+								<div id="suggest" class="btn btn-sm status_btn">
+									<img src="./img/suggest.png" alt="">
+									Suggest an edit
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+
+			</div>
+
+			<div class="words col-12">
+				Hello, Success, Motivation, Wish, Positive, Happiness, Hope, Powerful, Loyal, Glory
+			</div>
+		</div>
+
+	</div>
+	<!-- END CONTENT -->
+
+
+	<!-- START FEEDBACK MODAL -->
+	<div class="modal fade" id="feedback_modal" tabindex="-1" role="dialog" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="feedbackModalLabel">Send feedback</h5>
+
+	      </div>
+	      <div class="modal-body">
+	        <form action="">
+	        	<textarea name="text" id="feedback_text" rows="6" placeholder="Describe your issue or share your ideas"></textarea>
+	        </form>
+	      </div>
+			<div id="include_body">
+				<div id="include_switch">
+					<div class="custom-control custom-checkbox">
+						<input type="checkbox" class="custom-control-input" id="customCheck1" checked>
+						<label class="custom-control-label" for="customCheck1"></label>
+						<div id="include_title">Include screenshot</div>
+					</div>
+				</div>
+				<div>
+					<img src="./img/screenshot.jpg" class="img-fluid" alt="">
+				</div>
+				<div id="include_content">
+					Go to the <a href="#" class="modal_links">Legal Help page</a> to request content changes for legal reasons. Some <a href="#" class="modal_links">account and system information</a> may be sent to Google. We will use the information you give us to help address technical issues and to improve our services, subject to our <a href="#" class="modal_links">Privacy Policy</a> and <a href="#" class="modal_links">Terms of Service</a>.
+				</div>
+			</div>
+	      <div class="modal-footer">
+	        <button type="button" id="cancel" class="btn btn-light modal_btn" data-dismiss="modal">CANCEL</button>
+	        <button type="button" id="send" class="btn btn-light modal_btn">SEND</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<!-- END FEEDBACK MODAL -->
+
+	<!-- COMMON FOR TOOLBOX -->
+	<div id="unfocus_toolbox" class="hidden"></div>
+	<!-- START ACCOUNT TOOLBOX -->
+	<div id="accounts_toolbox" class="toolbox hidden">
+		<div class="persion_detail">
+			<div class="persion_detail_body d-flex align-items-center">
+				<div class="person_img_box">
+					<a href=""><img src="./img/1.jpg" class="rounded-circle"></a>
+				</div>
+				<div class="person_info_box">
+					<div id="persion_name" >Reza Javadpour</div>
+					<div id="persion_mail" class="mute">reza.javadpour.eng@gmail.com</div>
+					<div id="persion_social"><a href="#">Privacy</a></div>
+					<div id="persion_google_account"><div class="btn btn-sm btn-primary">Google Account</div></div>
+				</div>
+			</div>
+		</div>
+		<a class="another_persion_link" href="#">
+			<div class="another_person d-flex align-items-center">
+				<div>
+					<!-- <a href=""> -->
+						<img class="another_person_img rounded-circle" src="./img/2.jpg" alt="">
+					<!-- </a> -->
+				</div>
+				<div class="another_persion_detail">
+					<div class="a_persion_name" >Mohsen Faraji</div>
+					<div class="a_persion_mail mute" >mohsenfaraji26@gmail.com</div>
+					<div class="a_persion_status" >Signed out</div>
+				</div>
+			</div>
+		</a>
+		<a class="another_persion_link" href="#">
+			<div class="another_person d-flex align-items-center">
+				<div>
+					<img class="another_person_img rounded-circle" src="./img/3.jpg" alt="">
+				</div>
+				<div class="another_persion_detail">
+					<div class="a_persion_name" >Farshad Mosaffa</div>
+					<div class="a_persion_mail mute" >farshadmosaffa@gmail.com</div>
+					<div class="a_persion_status" >Signed out</div>
+				</div>
+			</div>
+		</a>
+		<div class="auth_toolbox_footer d-flex justify-content-between">
+			<div class="btn btn-sm btn-light">Add account</div>
+			<div class="btn btn-sm btn-light">Sign out</div>
+		</div>
+	</div>
+	<!-- END ACCOUNTS TOOLBOX -->
+
+	<!-- START APP TOOLBOX -->
+	<div id="app_toolbox" class="toolbox hidden">
+		<div class="app_toolbox_body row">
+
+			<div class="app_icon_tile col-4">
+				<div class="app_icon">
+					<img src="./img/app_menu/account.png" alt="">
+				</div>
+				<div class="app_title">Account</div>
+			</div>
+
+			<div class="app_icon_tile col-4">
+				<div class="app_icon">
+					<img src="./img/app_menu/search.png" alt="">
+				</div>
+				<div class="app_title">Search</div>
+			</div>
+
+			<div class="app_icon_tile col-4">
+				<div class="app_icon">
+					<img src="./img/app_menu/maps.png" alt="">
+				</div>
+				<div class="app_title">Maps</div>
+			</div>
+
+			<div class="app_icon_tile col-4">
+				<div class="app_icon">
+					<img src="./img/app_menu/youtube.png" alt="">
+				</div>
+				<div class="app_title">YouTube</div>
+			</div>
+
+			<div class="app_icon_tile col-4">
+				<div class="app_icon">
+					<img src="./img/app_menu/play.png" alt="">
+				</div>
+				<div class="app_title">Play</div>
+			</div>
+
+			<div class="app_icon_tile col-4">
+				<div class="app_icon">
+					<img src="./img/app_menu/news.png" alt="">
+				</div>
+				<div class="app_title">News</div>
+			</div>
+
+			<div class="app_icon_tile col-4">
+				<div class="app_icon">
+					<img src="./img/app_menu/gmail.png" alt="">
+				</div>
+				<div class="app_title">Gmail</div>
+			</div>
+
+			<div class="app_icon_tile col-4">
+				<div class="app_icon">
+					<img src="./img/app_menu/contacts.png" alt="">
+				</div>
+				<div class="app_title">Contacts</div>
+			</div>
+
+			<div class="app_icon_tile col-4">
+				<div class="app_icon">
+					<img src="./img/app_menu/drive.png" alt="">
+				</div>
+				<div class="app_title">Drive</div>
+			</div>
+
+			<div class="app_icon_tile col-4">
+				<div class="app_icon">
+					<img src="./img/app_menu/calendar.png" alt="">
+				</div>
+				<div class="app_title">Calendar</div>
+			</div>
+
+			<div class="app_icon_tile col-4">
+				<div class="app_icon">
+					<img src="./img/app_menu/google+.png" alt="">
+				</div>
+				<div class="app_title">Google+</div>
+			</div>
+
+			<div class="app_icon_tile col-4">
+				<div class="app_icon">
+					<img src="./img/app_menu/translate.png" alt="">
+				</div>
+				<div class="app_title">Translate</div>
+			</div>
+
+			<div class="app_icon_tile col-4">
+				<div class="app_icon">
+					<img src="./img/app_menu/photos.png" alt="">
+				</div>
+				<div class="app_title">Photos</div>
+			</div>
+
+		</div>
+
+
+		<div id="more_btn" class="btn btn-block">More</div>
+
+
+		<div id="more_app_toolbox" class="app_toolbox_body row hidden">
+
+			<div class="h_seperator col-12"></div>
+
+			<div class="app_icon_tile col-4">
+				<div class="app_icon">
+					<img src="./img/app_menu/shopping.png" alt="">
+				</div>
+				<div class="app_title">Shopping</div>
+			</div>
+
+			<div class="app_icon_tile col-4">
+				<div class="app_icon">
+					<img src="./img/app_menu/finance.png" alt="">
+				</div>
+				<div class="app_title">Finance</div>
+			</div>
+
+			<div class="app_icon_tile col-4">
+				<div class="app_icon">
+					<img src="./img/app_menu/docs.png" alt="">
+				</div>
+				<div class="app_title">Docs</div>
+			</div>
+
+			<div class="app_icon_tile col-4">
+				<div class="app_icon">
+					<img src="./img/app_menu/books.png" alt="">
+				</div>
+				<div class="app_title">Books</div>
+			</div>
+
+			<div class="app_icon_tile col-4">
+				<div class="app_icon">
+					<img src="./img/app_menu/blogger.png" alt="">
+				</div>
+				<div class="app_title">Blogger</div>
+			</div>
+
+			<div class="app_icon_tile col-4">
+				<div class="app_icon">
+					<img src="./img/app_menu/hangouts.png" alt="">
+				</div>
+				<div class="app_title">Hangouts</div>
+			</div>
+
+			<div class="app_icon_tile col-4">
+				<div class="app_icon">
+					<img src="./img/app_menu/keep.png" alt="">
+				</div>
+				<div class="app_title">Keep</div>
+			</div>
+
+			<div class="app_icon_tile col-4">
+				<div class="app_icon">
+					<img src="./img/app_menu/classroom.png" alt="">
+				</div>
+				<div class="app_title">Classroom</div>
+			</div>
+
+			<div class="app_icon_tile col-4">
+				<div class="app_icon">
+					<img src="./img/app_menu/earth.png" alt="">
+				</div>
+				<div class="app_title">Earth</div>
+			</div>
+
+		</div>
+
+		<div id="even_more_btn" class="btn btn-block">Even more from Google</div>
+
+	</div>
+	<!-- END APP TOOLBOX -->
+
+	<!-- START FOOTER -->
+	<nav id="bottom" class="navbar navbar-light fixed-bottom bg-light d-flex justify-content-between">
+		<div class="footer_content d-none d-xl-block d-lg-block">
+		  <a href="http://www.google.com/url?rs=rssf&q=http://translate.google.com/about/intl/en_ALL/">About Google Translate</a>
+		  <a href="http://www.google.com/url?rs=rssf&q=//translate.google.com/community">Community</a>
+		  <a href="http://www.google.com/url?rs=rssf&q=http://www.google.com/mobile/translate/">Mobile</a>
+		  <a class="seperator"></a>
+		  <a href="https://google.com/+GoogleTranslate"><img src="./img/g+.png" alt=""></a>
+		  <a href="https://googletranslate.blogspot.com/"><img src="./img/blogger.png" alt=""></a>
+		</div>
+		<div class="footer_content">
+		  <a href="http://www.google.com/url?rs=rssf&q=http://www.google.com/intl/en/about/%3Futm_source%3Dtranslate.google.com%26utm_medium%3Dreferral%26utm_campaign%3Dtranslate-footer-en">About Google</a>
+		  <a href="http://www.google.com/url?rs=rssf&q=http://www.google.com/intl/en/policies/">Privacy & Terms</a>
+		  <a href="http://www.google.com/url?rs=rssf&q=https://www.google.com/support/translate/%3Fhl%3Den">Help</a>
+		  <a class="feedback-btn" href="#" data-toggle="modal" data-target="#feedback_modal"><img id="feedback_icon" src="./img/feedback.png" alt="">Send Feedback</a>
+		</div>
+	</nav>
+	<!-- END FOOTER -->
+
+
+	<script>
+
+		// Modal Box
+		$('#myModal').on('shown.bs.modal', function () {
+		  $('#myInput').trigger('focus');
+		});
+
+		// Check Empty and show clear button
+		var input_Count = 0;
+		$("#input").keyup( function() {
+			input_Count = $("#input").val().length;
+			if (input_Count == 0) {
+				$('#delete_input').addClass('hidden');
+			}else{
+				$('#delete_input').removeClass('hidden');
+			}
+			document.getElementById("input_length").innerHTML = input_Count;
+		});
+
+		// Clear Input
+		$('#delete_input').click(function(){
+			$('#input').val('');
+			$('#delete_input').addClass('hidden');
+			input_Count = 0
+			document.getElementById("input_length").innerHTML = input_Count;
+			document.getElementById("output_result").innerHTML = '';
+		});
+
+		var dic_mode = 'en';
+		// Switch by Language Button
+		$('.persian_mode').click(function(){
+			sw_fa()
+		});
+		$('.english_mode').click(function(){
+			sw_en()
+		});
+		// Toogle Switch Language
+		$('#switch_lang').click(function(){
+			if ($(".persian_mode").hasClass("active")) {
+				sw_en()
+			}else if($(".english_mode").hasClass("active")){
+				sw_fa()
+			}
+		});
+		function sw_fa(){
+			$('.persian_mode').addClass('active');
+			$('.english_mode').removeClass('active');
+			dic_mode = 'fa';
+			translate()
+			$('#input').removeClass('text_left').addClass('text_right');
+			$('#output_result').removeClass('text_right').addClass('text_left');
+			$('#delete_input').removeClass('delete_btn_en').addClass('delete_btn_fa');
+		}
+		function sw_en(){
+			$(".english_mode").addClass("active")
+			$(".persian_mode").removeClass("active")
+			dic_mode = 'en';
+			translate()
+			$('#output_result').removeClass('text_left').addClass('text_right');
+			$('#input').removeClass('text_right').addClass('text_left');
+			$('#delete_input').removeClass('delete_btn_fa').addClass('delete_btn_en');
+		}
+
+		// Dictionary
+		var obj = {
+			0: {"en":"hello","fa":"سلام"	},
+			1: {"en":"happiness","fa":"خوشحالی"},
+			2: {"en":"success","fa":"موفقیت"},
+			3: {"en":"motivation","fa":"انگیزه"},
+			4: {"en":"wish","fa":"خواستن"},
+			5: {"en":"positive","fa":"مثبت"},
+			6: {"en":"hope","fa":"امید"},
+			7: {"en":"powerful","fa":"نیرومند"},
+			8: {"en":"loyal","fa":"وفادار"},
+			9: {"en":"glory","fa":"افتخار"},
+		}
+		var r='';
+		$('#translate_lang').click(function(){
+			translate();
+		});
+
+		$("#input").keyup( function() {
+			translate();
+		});
+		function translate(){
+			var inp = $("#input").val().toLowerCase();
+			for (i in obj) {
+				if((dic_mode=='fa') && (obj[i]['fa']==inp)){
+					r = (obj[i]['en']);
+				}else if((dic_mode=='en') && (obj[i]['en']==inp)){
+					r = (obj[i]['fa']);
+				}
+			}
+			result_dom(r);
+			r = '';
+		}
+		function result_dom(result){
+			document.getElementById("output_result").innerHTML = result;
+		}
+
+		// More APP Menu
+		var first_scroll = false;
+		$("#app_toolbox").scroll(function(){
+			if (!first_scroll) {
+				$('#more_btn').addClass('hidden');
+				$('#more_app_toolbox').removeClass('hidden');
+				first_scroll = true;
+			}
+		});
+
+		// Accounts Toolbox
+		$('#account_manager').click(function(){
+			if (!($('#app_toolbox').hasClass('hidden'))) {
+				$('#app_toolbox').addClass('hidden');
+			}
+			$('#accounts_toolbox').removeClass('hidden');
+			$('#unfocus_toolbox').removeClass('hidden');
+		});
+		$("#unfocus_toolbox").click(function(){
+		    $('#accounts_toolbox').addClass('hidden');
+		    $('#unfocus_toolbox').addClass('hidden');
+		});
+
+		// APP Menu Toolbox
+		$('#app_menu').click(function(){
+			if (!($('#accounts_toolbox').hasClass('hidden'))) {
+				$('#accounts_toolbox').addClass('hidden');
+			}
+			$('#app_toolbox').removeClass('hidden');
+			$('#unfocus_toolbox').removeClass('hidden');
+			$('#more_btn').removeClass('hidden');
+			$('#more_app_toolbox').addClass('hidden');
+			first_scroll = false;
+		});
+		$("#unfocus_toolbox").click(function(){
+		    first_scroll = false;
+		    $('#app_toolbox').scrollTop(0);
+			$('#more_app_toolbox').addClass('hidden');
+		    $('#app_toolbox').addClass('hidden');
+		    $('#unfocus_toolbox').addClass('hidden');
+		});
+		$("#more_btn").click(function(){
+			first_scroll = true;
+			$('#more_btn').addClass('hidden');
+			$('#more_app_toolbox').removeClass('hidden');
+			$('#app_toolbox').scrollTop(400);
+		});
+
+
+
+
+
+	</script>
+</body>
+</html>
